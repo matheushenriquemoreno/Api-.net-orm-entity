@@ -9,13 +9,12 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Model
     {
 
         public string Id { get; set; }
-
-        public int IdTecnico {get; set;}
         public Tecnico Tecnico { get; set; }
-        public int IdEquipamentoCliente { get; set; }
         public EquipamentoCliente EquipamentoCliente { get; set; }
-
-
+        public StatusOrdemServico StatusDaOrdem { get; set; }
+        public string DefeitoApresentado { get; set; }
+        public string DescricaoServico { get; set; }
+        public bool FoiPrecisoInstalarPecas { get; set; }
 
     }
 }

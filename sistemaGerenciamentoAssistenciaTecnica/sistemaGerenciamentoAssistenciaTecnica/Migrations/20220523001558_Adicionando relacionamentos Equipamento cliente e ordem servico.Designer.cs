@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sistemaGerenciamentoAssistenciaTecnica.InfraEntity;
 
 namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220523001558_Adicionando relacionamentos Equipamento cliente e ordem servico")]
+    partial class AdicionandorelacionamentosEquipamentoclienteeordemservico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,9 +135,6 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
                     b.Property<bool>("FoiPrecisoInstalarPecas")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("IdStatusOrdemServico")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TecnicoId")
                         .HasColumnType("int");
 
@@ -143,32 +142,9 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
 
                     b.HasIndex("EquipamentoClienteId");
 
-                    b.HasIndex("IdStatusOrdemServico")
-                        .IsUnique();
-
                     b.HasIndex("TecnicoId");
 
-                    b.ToTable("OrdemServicos");
-                });
-
-            modelBuilder.Entity("sistemaGerenciamentoAssistenciaTecnica.Model.StatusOrdemServico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Fim")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("Inicio")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StatusOrdems");
+                    b.ToTable("OrdemServico");
                 });
 
             modelBuilder.Entity("sistemaGerenciamentoAssistenciaTecnica.Model.Tecnico", b =>
@@ -233,17 +209,11 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
                         .WithMany("OrdensServicos")
                         .HasForeignKey("EquipamentoClienteId");
 
-                    b.HasOne("sistemaGerenciamentoAssistenciaTecnica.Model.StatusOrdemServico", "StatusDaOrdem")
-                        .WithOne("Ordem")
-                        .HasForeignKey("sistemaGerenciamentoAssistenciaTecnica.Model.OrdemServico", "IdStatusOrdemServico");
-
                     b.HasOne("sistemaGerenciamentoAssistenciaTecnica.Model.Tecnico", "Tecnico")
                         .WithMany("OrdensServicos")
                         .HasForeignKey("TecnicoId");
 
                     b.Navigation("EquipamentoCliente");
-
-                    b.Navigation("StatusDaOrdem");
 
                     b.Navigation("Tecnico");
                 });
@@ -261,11 +231,6 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
             modelBuilder.Entity("sistemaGerenciamentoAssistenciaTecnica.Model.EquipamentoCliente", b =>
                 {
                     b.Navigation("OrdensServicos");
-                });
-
-            modelBuilder.Entity("sistemaGerenciamentoAssistenciaTecnica.Model.StatusOrdemServico", b =>
-                {
-                    b.Navigation("Ordem");
                 });
 
             modelBuilder.Entity("sistemaGerenciamentoAssistenciaTecnica.Model.Tecnico", b =>

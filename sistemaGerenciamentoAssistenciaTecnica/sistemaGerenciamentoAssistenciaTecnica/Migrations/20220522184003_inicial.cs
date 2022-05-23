@@ -65,7 +65,7 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_EspecialidadesTecnico_TecnicosEspecialidadeId",
                 table: "EspecialidadesTecnico",
-                column: "TecnicosEspecialidadeId");
+                column: "TecnicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
