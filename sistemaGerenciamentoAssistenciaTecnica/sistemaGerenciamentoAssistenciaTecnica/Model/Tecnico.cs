@@ -10,13 +10,13 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Model
     {
         public string Sexo { get; set; }
         public StatusTecnico Status { get; set; }
-        public List<Especialidades> Especialidades { get; set; }
-
-        public List<OrdemServico> OrdensServicos { get; set; }
+        public virtual List<Especialidades> Especialidades { get; set; }
+        public virtual List<OrdemServico> OrdensServicos { get; set; }
 
         public Tecnico()
         {
             Especialidades = new List<Especialidades>();
+            OrdensServicos = new List<OrdemServico>();
         }
     }
 }

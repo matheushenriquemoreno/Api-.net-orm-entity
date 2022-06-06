@@ -35,7 +35,17 @@ namespace sistemaGerenciamentoAssistenciaTecnica.InfraEntity
                 .HasOne(OS => OS.StatusDaOrdem)
                 .WithOne(SOS => SOS.Ordem)
                 .HasForeignKey<OrdemServico>("IdStatusOrdemServico");
-               
+         
+            modelBuilder.Entity<Pagamento>()
+                .HasOne(P => P.OrdemServico)
+                .WithOne(OS => OS.PagementoOrdem)
+                .HasForeignKey<Pagamento>("IdOrdemServico");
+
+            modelBuilder.Entity<Pagamento>()
+                .HasOne(P => P.Status)
+                .WithOne(ST => ST.Pagamento)
+                .HasForeignKey<Pagamento>("IdStatusPagamento");
+
 
         }
 
@@ -54,7 +64,8 @@ namespace sistemaGerenciamentoAssistenciaTecnica.InfraEntity
         public DbSet<Especialidades> Especialidades { get; set; }
 
 
-
-
+        public DbSet<Pagamento> Pagamentos { get; set; }
+        public DbSet<StatusPagamento> StatusPagamentos { get; set; }
+        
     }
 }

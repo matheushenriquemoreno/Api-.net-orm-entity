@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace sistemaGerenciamentoAssistenciaTecnica.Model
 {
-    public class EquipamentoCliente
+    public class EquipamentoCliente : EntidadeBase
     {
         public int Id { get; set; }
-        public Cliente Cliente { get; set; }
-        public Equipamento Equipamento { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual Equipamento Equipamento { get; set; }
         public bool EhConfiguracaoPersonaliazada { get; set; }
-        public List<OrdemServico> OrdensServicos { get; set; }
+        public virtual List<OrdemServico> OrdensServicos { get; set; }
 
     }
 }

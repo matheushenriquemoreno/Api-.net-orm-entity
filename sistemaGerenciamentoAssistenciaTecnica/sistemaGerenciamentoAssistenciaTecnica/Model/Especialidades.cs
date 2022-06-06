@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sistemaGerenciamentoAssistenciaTecnica.Model
 {
-    public class Especialidades
+    public class Especialidades : EntidadeBase
     {
         [Key]
         public int Id { get; set; }
@@ -15,7 +15,7 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Model
 
         public string Descricao { get; set; }
 
-        public List<Tecnico> TecnicosEspecialidade {get; set;}
+        public virtual List<Tecnico> TecnicosEspecialidade {get; set;}
 
         public Especialidades()
         {

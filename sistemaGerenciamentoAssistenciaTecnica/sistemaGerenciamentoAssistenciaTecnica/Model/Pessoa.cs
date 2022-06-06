@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sistemaGerenciamentoAssistenciaTecnica.Model
 {
-    public class Pessoa
+    public class Pessoa : EntidadeBase
     {
         [Key]
         public int Id { get; set; }

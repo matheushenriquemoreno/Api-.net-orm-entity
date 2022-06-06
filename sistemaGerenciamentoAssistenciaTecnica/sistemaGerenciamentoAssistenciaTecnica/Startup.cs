@@ -9,10 +9,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using sistemaGerenciamentoAssistenciaTecnica.InfraEntity;
+using sistemaGerenciamentoAssistenciaTecnica.Model;
+using sistemaGerenciamentoAssistenciaTecnica.Repository.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace sistemaGerenciamentoAssistenciaTecnica
 {
@@ -29,8 +32,21 @@ namespace sistemaGerenciamentoAssistenciaTecnica
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<AppDBContext>(Opts => Opts.UseMySQL(Configuration.GetConnectionString("FilmeConecction")));
+            services.AddDbContext<AppDBContext>(Opts => Opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("FilmeConecction")));
 
+            services.AddTransient<IRepositoryBase<Tecnico>, RepositoryBase<Tecnico>>();
+            services.AddTransient<IRepositoryBase<Especialidades>, RepositoryBase<Especialidades>>();
+            services.AddTransient<IRepositoryBase<Cliente>, RepositoryBase<Cliente>>();
+            services.AddTransient<IRepositoryBase<EquipamentoCliente>, RepositoryBase<EquipamentoCliente>>();
+            services.AddTransient<IRepositoryBase<OrdemServico>, RepositoryBase<OrdemServico>>();
+            services.AddTransient<IRepositoryBase<Pagamento>, RepositoryBase<Pagamento>>();
+            services.AddTransient<IRepositoryBase<StatusOrdemServico>, RepositoryBase<StatusOrdemServico>>();
+            services.AddTransient<IRepositoryBase<StatusPagamento>, RepositoryBase<StatusPagamento>>();
+            services.AddTransient<IRepositoryBase<Equipamento>, RepositoryBase<Equipamento>>();
+
+
+            services.AddControllers().AddNewtonsoftJson(x =>
+                    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

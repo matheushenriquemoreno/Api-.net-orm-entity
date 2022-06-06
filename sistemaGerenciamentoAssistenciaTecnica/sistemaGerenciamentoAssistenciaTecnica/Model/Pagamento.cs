@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace sistemaGerenciamentoAssistenciaTecnica.Model
 {
-    public class Pagamento
+    public class Pagamento : EntidadeBase
     {
         public int Id { get; set; }
 
@@ -13,7 +13,8 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Model
 
         public double ValorDoServico { get; set; }
 
+        public virtual StatusPagamento Status { get; set; }
 
-
+        public virtual OrdemServico OrdemServico { get; set; }
     }
 }

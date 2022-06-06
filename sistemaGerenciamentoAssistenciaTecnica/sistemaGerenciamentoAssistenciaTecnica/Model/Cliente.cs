@@ -9,11 +9,11 @@ namespace sistemaGerenciamentoAssistenciaTecnica.Model
     {
         public string Email { get; set; }
 
-        public List<EquipamentoCliente> Equipamentos { get; set; }
+        public virtual List<EquipamentoCliente> Equipamentos { get; set; }
 
-
-
-
-
+        public Cliente()
+        {
+            Equipamentos = new List<EquipamentoCliente>();
+        }
     }
 }
